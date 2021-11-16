@@ -14,6 +14,32 @@ router.get('/celebrities', (req, res, next) => {
 	
 });
 
+router.get('/movies/new', (req, res, next) => {
+		
+	Celebrity.find()
+		.then(celebritiesFromDB => {
+			// console.log(celebritiesFromDB)
+			
+			res.render('../views/movies/new.hbs', { celebrityList: celebritiesFromDB })
+		})
+		.catch(err => next(err))
+	
+});
+
+router.get('/movies/edit', (req, res, next) => {
+		
+	Celebrity.find()
+		.then(celebritiesFromDB => {
+			// console.log(celebritiesFromDB)
+			
+			res.render('../views/movies/edit.hbs', { celebrityList: celebritiesFromDB })
+		})
+		.catch(err => next(err))
+	
+});
+
+
+
 router.get('/celebrities/new', (req, res, next) => {
 	res.render('celebrities/new')
 });
@@ -32,7 +58,7 @@ router.post('/celebrities', (req, res, next) => {
     .then(createdCelebrity => {
         // console.log(createdCelebrity)
         
-        res.redirect(`/celebrities/${createdCelebrity._id}`)
+        res.redirect(`/celebrities/${createdCelebrity.id}`)
     })
     .catch(err => next(err))
 
@@ -48,6 +74,8 @@ router.get('/celebrities/:id/edit', (req, res, next) => {
         })
         .catch(err => next(err))
 });
+
+
 
 
 
